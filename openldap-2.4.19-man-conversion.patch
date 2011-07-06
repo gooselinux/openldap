@@ -1,0 +1,134 @@
+--- openldap-2.4.19/doc/man/man8/slapacl.8.orig	2010-05-17 13:07:55.000000000 +0200
++++ openldap-2.4.19/doc/man/man8/slapacl.8	2010-05-17 13:08:23.000000000 +0200
+@@ -81,16 +81,6 @@
+ .TP
+ .BI \-F \ confdir
+ specify a config directory.
+-If both
+-.B \-f
+-and
+-.B \-F
+-are specified, the config file will be read and converted to
+-config directory format and written to the specified directory.
+-If neither option is specified, an attempt to read the
+-default config directory will be made before trying to use the default
+-config file. If a valid config directory exists then the
+-default config file is ignored.
+ .TP
+ .BI \-o \ option\fR[ = value\fR]
+ Specify an
+--- openldap-2.4.19/doc/man/man8/slapadd.8.orig	2010-05-17 13:07:18.000000000 +0200
++++ openldap-2.4.19/doc/man/man8/slapadd.8	2010-05-17 13:07:26.000000000 +0200
+@@ -97,17 +97,6 @@
+ .TP
+ .BI \-F \ confdir
+ specify a config directory.
+-If both
+-.B \-f
+-and
+-.B \-F
+-are specified, the config file will be read and converted to
+-config directory format and written to the specified directory.
+-If neither option is specified, an attempt to read the
+-default config directory will be made before trying to use the default
+-config file. If a valid config directory exists then the
+-default config file is ignored. If dry-run mode is also specified,
+-no conversion will occur.
+ .TP
+ .B \-g
+ disable subordinate gluing.  Only the specified database will be
+--- openldap-2.4.19/doc/man/man8/slapauth.8.orig	2010-05-17 13:08:11.000000000 +0200
++++ openldap-2.4.19/doc/man/man8/slapauth.8	2010-05-17 13:09:00.000000000 +0200
+@@ -60,16 +60,6 @@
+ .TP
+ .BI \-F \ confdir
+ specify a config directory.
+-If both
+-.B \-f
+-and
+-.B \-F
+-are specified, the config file will be read and converted to
+-config directory format and written to the specified directory.
+-If neither option is specified, an attempt to read the
+-default config directory will be made before trying to use the default
+-config file. If a valid config directory exists then the
+-default config file is ignored.
+ .TP
+ .BI \-M \ mech
+ specify a mechanism.
+--- openldap-2.4.19/doc/man/man8/slapcat.8.orig	2010-05-17 13:08:03.000000000 +0200
++++ openldap-2.4.19/doc/man/man8/slapcat.8	2010-05-17 13:08:41.000000000 +0200
+@@ -94,16 +94,6 @@
+ .TP
+ .BI \-F \ confdir
+ specify a config directory.
+-If both
+-.B \-f
+-and
+-.B \-F
+-are specified, the config file will be read and converted to
+-config directory format and written to the specified directory.
+-If neither option is specified, an attempt to read the
+-default config directory will be made before trying to use the default
+-config file. If a valid config directory exists then the
+-default config file is ignored.
+ .TP
+ .B \-g
+ disable subordinate gluing.  Only the specified database will be
+--- openldap-2.4.19/doc/man/man8/slapdn.8.orig	2010-05-17 13:09:23.000000000 +0200
++++ openldap-2.4.19/doc/man/man8/slapdn.8	2010-05-17 13:09:33.000000000 +0200
+@@ -51,16 +51,6 @@
+ .TP
+ .BI \-F \ confdir
+ specify a config directory.
+-If both
+-.B \-f
+-and
+-.B \-F
+-are specified, the config file will be read and converted to
+-config directory format and written to the specified directory.
+-If neither option is specified, an attempt to read the
+-default config directory will be made before trying to use the default
+-config file. If a valid config directory exists then the
+-default config file is ignored.
+ .TP
+ .BI \-N
+ only output a normalized form of the \fIDN\fP, suitable to be used
+--- openldap-2.4.19/doc/man/man8/slapindex.8.orig	2010-05-17 13:09:53.000000000 +0200
++++ openldap-2.4.19/doc/man/man8/slapindex.8	2010-05-17 13:10:32.000000000 +0200
+@@ -87,16 +87,6 @@
+ .TP
+ .BI \-F \ confdir
+ specify a config directory.
+-If both
+-.B \-f
+-and
+-.B \-F
+-are specified, the config file will be read and converted to
+-config directory format and written to the specified directory.
+-If neither option is specified, an attempt to read the
+-default config directory will be made before trying to use the default
+-config file. If a valid config directory exists then the
+-default config file is ignored.
+ .TP
+ .B \-g
+ disable subordinate gluing.  Only the specified database will be
+--- openldap-2.4.19/doc/man/man8/slapschema.8.orig	2010-05-17 13:10:48.000000000 +0200
++++ openldap-2.4.19/doc/man/man8/slapschema.8	2010-05-17 13:11:35.000000000 +0200
+@@ -97,16 +97,6 @@
+ .TP
+ .BI \-F \ confdir
+ specify a config directory.
+-If both
+-.B \-f
+-and
+-.B \-F
+-are specified, the config file will be read and converted to
+-config directory format and written to the specified directory.
+-If neither option is specified, an attempt to read the
+-default config directory will be made before trying to use the default
+-config file. If a valid config directory exists then the
+-default config file is ignored.
+ .TP
+ .B \-g
+ disable subordinate gluing.  Only the specified database will be

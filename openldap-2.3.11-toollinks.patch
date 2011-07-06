@@ -1,0 +1,20 @@
+If libexecdir and sbindir are the same, avoid making an absolute symlink.
+
+ 
+diff -up openldap-2.4.11/servers/slapd/Makefile.in.patch5 openldap-2.4.11/servers/slapd/Makefile.in
+--- openldap-2.4.11/servers/slapd/Makefile.in.patch5	2008-09-01 09:57:09.000000000 +0200
++++ openldap-2.4.11/servers/slapd/Makefile.in	2008-09-01 09:57:09.000000000 +0200
+@@ -270,7 +270,12 @@ slapd: $(SLAPD_DEPENDS) @LIBSLAPI@
+ 		$(WRAP_LIBS)
+ 	$(RM) $(SLAPTOOLS)
+ 	for i in $(SLAPTOOLS); do \
+-		$(LN_S) slapd$(EXEEXT) $$i$(EXEEXT); done
++		if test $(libexecdir) != $(sbindir) ; then \
++			$(LN_S) $(libexecdir)/slapd$(EXEEXT) $$i$(EXEEXT); \
++		else \
++			$(LN_S) slapd$(EXEEXT) $$i$(EXEEXT); \
++		fi \
++	done
+ 
+ 
+ sslapd: version.o

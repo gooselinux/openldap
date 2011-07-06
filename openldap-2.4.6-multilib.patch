@@ -1,0 +1,30 @@
+diff -up openldap-2.4.11/doc/man/man8/slapd.8.patch9 openldap-2.4.11/doc/man/man8/slapd.8
+--- openldap-2.4.11/doc/man/man8/slapd.8.patch9	2008-02-12 00:26:40.000000000 +0100
++++ openldap-2.4.11/doc/man/man8/slapd.8	2008-09-01 09:57:09.000000000 +0200
+@@ -5,7 +5,7 @@
+ .SH NAME
+ slapd \- Stand-alone LDAP Daemon
+ .SH SYNOPSIS
+-.B LIBEXECDIR/slapd 
++.B slapd 
+ [\c
+ .BR \-4 | \-6 ]
+ [\c
+@@ -312,7 +312,7 @@ on voluminous debugging which will be pr
+ .LP
+ .nf
+ .ft tt
+-	LIBEXECDIR/slapd \-f /var/tmp/slapd.conf \-d 255
++	slapd -f /var/tmp/slapd.conf -d 255
+ .ft
+ .fi
+ .LP
+@@ -320,7 +320,7 @@ To test whether the configuration file i
+ .LP
+ .nf
+ .ft tt
+-	LIBEXECDIR/slapd \-Tt
++	slapd -Tt
+ .ft
+ .fi
+ .LP

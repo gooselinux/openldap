@@ -1,0 +1,16 @@
+Build both slapd as position-independent executables.  This really
+should be threaded into the various autotools, but I guess this is what we have
+until that happens, if it happens.
+
+diff -up openldap-2.4.11/servers/slapd/Makefile.in.patch4 openldap-2.4.11/servers/slapd/Makefile.in
+--- openldap-2.4.11/servers/slapd/Makefile.in.patch4	2008-02-12 00:26:43.000000000 +0100
++++ openldap-2.4.11/servers/slapd/Makefile.in	2008-09-01 09:57:09.000000000 +0200
+@@ -266,7 +266,7 @@ libslapi.a: slapi/.libs/libslapi.a
+ 	cp slapi/.libs/libslapi.a .
+ 
+ slapd: $(SLAPD_DEPENDS) @LIBSLAPI@
+-	$(LTLINK) -o $@ $(SLAPD_OBJECTS) $(LIBS) \
++	$(LTLINK) -pie -Wl,-z,defs -o $@ $(SLAPD_OBJECTS) $(LIBS) \
+ 		$(WRAP_LIBS)
+ 	$(RM) $(SLAPTOOLS)
+ 	for i in $(SLAPTOOLS); do \

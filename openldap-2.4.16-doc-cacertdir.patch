@@ -1,0 +1,10 @@
+--- openldap-2.4.16/doc/man/man5/ldap.conf.5.orig	2009-09-16 17:12:01.000000000 +0200
++++ openldap-2.4.16/doc/man/man5/ldap.conf.5	2009-09-16 17:15:32.000000000 +0200
+@@ -305,6 +305,7 @@
+ .B TLS_CACERT
+ is always used before
+ .B TLS_CACERTDIR.
++The specified directory must be managed with the OpenSSL c_rehash utility.
+ This parameter is ignored with GNUtls.
+ .TP
+ .B TLS_CERT <filename>

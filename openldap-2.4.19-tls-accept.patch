@@ -1,0 +1,29 @@
+--- openldap-2.4.19/servers/slapd/connection.c.orig	2009-11-16 12:54:33.000000000 +0100
++++ openldap-2.4.19/servers/slapd/connection.c	2009-11-16 13:23:25.000000000 +0100
+@@ -1376,6 +1376,11 @@ connection_read( ber_socket_t s, conn_re
+ 			    c->c_connid, (int) s, c->c_tls_ssf, c->c_ssf, 0 );
+ 			slap_sasl_external( c, c->c_tls_ssf, &authid );
+ 			if ( authid.bv_val ) free( authid.bv_val );
++		} else if ( rc == 1 && ber_sockbuf_ctrl( c->c_sb,
++			LBER_SB_OPT_NEEDS_WRITE, NULL )) {  /* need to retry */
++			slapd_set_write( s, 1 );
++			connection_return( c );
++			return 0;
+ 		}
+ 
+ 		/* if success and data is ready, fall thru to data input loop */
+@@ -1875,6 +1880,14 @@ int connection_write(ber_socket_t s)
+ 		return -1;
+ 	}
+ 
++#ifdef HAVE_TLS
++	if ( c->c_is_tls && c->c_needs_tls_accept ) {
++		connection_return( c );
++		connection_read_activate( s );
++		return 0;
++	}
++#endif
++
+ 	c->c_n_write++;
+ 
+ 	Debug( LDAP_DEBUG_TRACE,
