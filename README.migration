@@ -1,0 +1,4 @@
+As from Fedora 9, MigrationTools are shipped as separate package.
+Install "migrationtools" package to get them, e.g.:
+
+yum install migrationtools

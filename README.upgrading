@@ -1,0 +1,68 @@
+Before upgrading from OpenLDAP 2.0 or 2.1 to OpenLDAP 2.2, the system
+administrator should dump out the contents of the the directory server's
+databases using the 'slapcat' utility included in the openldap-servers package
+and save the LDIF files which it produces.
+
+After the upgrade is complete, the data can be re-imported using the 'slapadd'
+utility.  Some data which was exported from an OpenLDAP 2.0 server may not
+import directly into an OpenLDAP 2.2 server.  If this happens, check for these
+common problems:
+
+  * Missing parent entries.
+    Entries in the directory are no longer allowed to be children of entries
+    which are not present in the directory.  For example, earlier releases
+    would allow an entry with distinguished name (DN)
+    "cn=foo,dc=devel,dc=example,dc=com" to be imported into a database for
+    suffix "dc=example,dc=com" which contained neither an entry for
+    "dc=devel,dc=example,dc=com" nor an entry for "dc=example,dc=com".
+
+  * Deprecated objectclasses and attribute types.
+    Entries of these classes should be replaced by entries of a different
+    class.
+     * the automountMap objectclass
+       Use the nisMap objectclass instead, replacing these old attributes
+       with new attributes:
+       +====================================+
+       | old attribute	    new attribute   |
+       |------------------------------------|
+       | ou		    nisMapName      |
+       +====================================+
+     * the automount objectclass
+       Use the nisObject objectclass instead, replacing these old attributes
+       with new attributes:
+       +====================================+
+       | old attribute	      new attribute |
+       |------------------------------------|
+       | cn                   cn            |
+       | automountInformation nisMapEntry   |
+       | (no counterpart)     nisMapName    |
+       +====================================+
+
+  * Missing objectclass definitions.
+    Some objectclasses are no longer defined because they are no longer used.
+    Remove the objectclass from the entry's list of objectclasses, and
+    remove any values for attributes which are unique to that objectclass.
+    These include:
+     * the "kerberosSecurityObject" objectclass and the "krbName" attribute
+     * the "dynamicObject" objectclass
+     * the "LDAPsubEntry" objectclass
+
+  * Missing attribute values.
+    Some objectclass definitions mark a given attribute as both optional (MAY)
+    and required (MUST).  While such attributes may have been treated as
+    optional before, they are now treated as required.  Some examples:
+     * the "ipProtocol" object class and its "description" attribute
+     * the "rpcService" object class and its "description" attribute
+     * the "oncRpc" object class and its "description" attribute
+     * the "residentialPerson" object class and its "localityName" attribute
+
+  * Structural vs. auxiliary objectclasses.
+    The set of objectclasses which any entry lists should include exactly one
+    STRUCTURAL class.  This requirement may not have been enforced in previous
+    releases.
+
+  * The entry does not contain its own RDN as an attribute-value pair.
+    The naming attribute and value used as the entry's relative distinguished
+    name (RDN) must be explicitly defined for the entry.  For example, an
+    entry named "cn=contrived,dc=example,dc=com" must include "contrived" as a
+    value for its "cn" attribute.

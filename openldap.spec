@@ -12,7 +12,7 @@
 Summary: LDAP support libraries
 Name: openldap
 Version: %{version_main}
-Release: 15%{?dist}
+Release: 15%{?dist}.2
 License: OpenLDAP
 Group: System Environment/Daemons
 Source0: ftp://ftp.OpenLDAP.org/pub/OpenLDAP/openldap-release/openldap-%{version_main}.tgz
@@ -43,6 +43,9 @@ Patch12: openldap-2.4.19-tls-accept.patch
 Patch13: openldap-2.4.19-dn2id-segfault.patch
 Patch14: openldap-2.4.19-man-conversion.patch
 Patch15: openldap-2.4.19-modrdn-segfault.patch
+Patch16: openldap-2.4.19-cve-ppolicy-forward-updates.patch
+Patch17: openldap-2.4.19-cve-ndb-bind-rootdn.patch
+Patch18: openldap-2.4.19-security-dos-empty-modrdn.patch
 
 # Patches specific for compat-openldap
 # This is the same patch as Patch2
@@ -173,6 +176,9 @@ pushd openldap-%{version_main}
 %patch13 -p1 -b .dn2id-segfault
 %patch14 -p1 -b .conversion
 %patch15 -p1 -b .modrdn-segfault
+%patch16 -p1 -b .cve-ppolicy-forward-updates
+%patch17 -p1 -b .cve-ndb-bind-rootdn
+%patch18 -p1 -b .security-dos-empty-modrdn
 
 cp %{_datadir}/libtool/config/config.{sub,guess} build/
 popd
@@ -721,6 +727,13 @@ fi
 %attr(0644,root,root)      %{evolution_connector_libdir}/*.a
 
 %changelog
+* Tue Mar 01 2011 Jan Vcelak <jvcelak@redhat.com> 2.4.19-15.2
+- fix: security - DoS when submitting special MODRDN request (#680975)
+
+* Mon Feb 28 2011 Jan Vcelak <jvcelak@redhat.com> 2.4.19-15.1
+- fix: CVE-2011-1024 ppolicy forwarded bind failure messages cause success
+- fix: CVE-2011-1025 rootpw is not verified for ndb backend
+
 * Fri Jun 25 2010 Jan Zeleny <jzeleny@redhat.com> - 2.4.19-15
 - fixed regression caused by tls accept patch (#608112)
 
